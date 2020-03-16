@@ -3,7 +3,8 @@
 var express = require('express');
 var cors = require('cors');
 var multer = require("multer");
-var upload = multer({ dest: 'uploads/' });
+var body = require("body-parser");
+var upload = multer();
 
 // require and use "multer"...
 
