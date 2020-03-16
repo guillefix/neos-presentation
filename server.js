@@ -2,10 +2,11 @@
 
 var express = require('express');
 var cors = require('cors');
-var multer = require("multer");
-var upload = multer({ dest: './tmp/' });
 
 // require and use "multer"...
+var multer = require("multer");
+var storage = multer.memoryStorage();
+var upload = multer({storage: storage, limits: {fileSize: 30000000}});
 
 var app = express();
 
@@ -21,7 +22,7 @@ app.get('/hello', function(req, res){
 });
 
 app.post('/api/fileanalyse', upload.single('myFile'), (req, res) => {
-  console.log(req.file, req.body);
+  console.log(JSON.stringify(req.file));
   res.send('???');
 })
 
