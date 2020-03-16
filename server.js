@@ -3,6 +3,7 @@
 var express = require('express');
 var cors = require('cors');
 var multer = require("multer");
+var upload = multer({ dest: 'uploads/' });
 
 // require and use "multer"...
 
@@ -20,7 +21,7 @@ app.get('/hello', function(req, res){
 });
 
 app.post('/api/fileanalyse', (req, res) => {
-  console.log(req.query.upfile);
+  console.log(req.file, req.body);
   res.send('???');
 })
 
