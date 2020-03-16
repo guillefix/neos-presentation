@@ -21,9 +21,9 @@ app.get('/hello', function(req, res){
   res.json({greetings: "Hello, API"});
 });
 
-app.post('/api/fileanalyse', upload.single('myFile'), (req, res) => {
-  console.log(JSON.stringify(req.file));
-  res.send('???');
+app.post('/api/fileanalyse', upload.single('upfile'), (req, res) => {
+  // console.log(req.file.fieldname, req.file.mimetype, req.file.size);
+  res.send({name: req.file.originalname, type: req.file.mimetype, size: req.file.size});
 })
 
 app.listen(process.env.PORT || 3000, function () {
