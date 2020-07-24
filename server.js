@@ -32,7 +32,8 @@ var fs = require('fs');
 var app = express();
 
 app.use(cors());
-app.use('/public', express.static(process.cwd() + '/public'));
+// app.use('/public', express.static(process.cwd() + '/public'));
+app.use(express.static('public'));
 
 app.get('/', function (req, res) {
      res.sendFile(process.cwd() + '/views/index.html');
@@ -40,6 +41,18 @@ app.get('/', function (req, res) {
 
 app.get('/hello', function(req, res){
   res.json({greetings: "Hello, API"});
+});
+
+const { exec } = require('child_process');
+exec('convert -density 300 public/upfile-1595630501065.pdf -resize 25% public/a.png', (err, stdout, stderr) => {
+  if (err) {
+    //some err occurred
+    console.error(err)
+  } else {
+   // the *entire* stdout and stderr (buffered)
+   console.log(`stdout: ${stdout}`);
+   console.log(`stderr: ${stderr}`);
+  }
 });
 
 app.post('/api/fileanalyse', upload.single('upfile'), (req, res, body) => {
@@ -53,6 +66,8 @@ app.post('/api/fileanalyse', upload.single('upfile'), (req, res, body) => {
       // res.send({name: req.file.originalname, type: req.file.mimetype, size: req.file.size});
       // res.send("Ok")
       res.sendFile(imagePath);
+    }, function (err) {
+      res.send(err, 500);
     });
 //   pdf2pic.convert(req.file.path).then((resolve) => {
 //   console.log("image converter successfully!");

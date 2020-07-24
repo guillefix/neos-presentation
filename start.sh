@@ -13,3 +13,4 @@ fi
 cd
 pnpm install --reporter silent --prefer-offline --audit false
 npm run-script run --silent
+sed -i '/policy domain="coder" rights="none" pattern="PDF"/c\policy domain="coder" rights="read|write" pattern="PDF" ' /etc/ImageMagick-6/policy.xml
