@@ -7,6 +7,9 @@ var cors = require('cors');
 var multer = require("multer");
 var storage = multer.memoryStorage();
 var upload = multer({storage: storage, limits: {fileSize: 30000000}});
+var PDFImage = require("pdf-image").PDFImage;
+var fs = require('fs');
+
 
 var app = express();
 
@@ -23,7 +26,15 @@ app.get('/hello', function(req, res){
 
 app.post('/api/fileanalyse', upload.single('upfile'), (req, res) => {
   // console.log(req.file.fieldname, req.file.mimetype, req.file.size);
-  res.send({name: req.file.originalname, type: req.file.mimetype, size: req.file.size});
+  fs.writeFile("thingy.pdf", req.file, ()=>{
+      var pdfImage = new PDFImage("thingy.pdf");
+      pdfImage.convertPage(0).then(function (imagePath) {
+        // 0-th page (first page) of the slide.pdf is available as slide-0.png
+        fs.existsSync("/tmp/slide-0.png") // => true
+        // res.send({name: req.file.originalname, type: req.file.mimetype, size: req.file.size});
+        res.send("Ok")
+});
+  })
 })
 
 app.listen(process.env.PORT || 3000, function () {
