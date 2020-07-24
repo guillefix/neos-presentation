@@ -59,7 +59,7 @@ app.post('/api/fileanalyse', upload.single('upfile'), (req, res, body) => {
  
 //   return resolve;
 //   res.send("ok")
-  });
+  // });
 
 })
 
