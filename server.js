@@ -45,20 +45,20 @@ app.get('/hello', function(req, res){
 app.post('/api/fileanalyse', upload.single('upfile'), (req, res, body) => {
   // console.log(req.file.fieldname, req.file.mimetype, req.file.size);
   // res.send(req.file.path);
-    // var PDFImage = require("pdf-image").PDFImage;
-    // var pdfImage = new PDFImage(req.file.path);
-    // pdfImage.convertPage(0).then(function (imagePath) {
-    //   // 0-th page (first page) of the slide.pdf is available as slide-0.png
-    //   // fs.existsSync("/tmp/slide-0.png") // => true
-    //   // res.send({name: req.file.originalname, type: req.file.mimetype, size: req.file.size});
-    //   // res.send("Ok")
-    //   res.sendFile(imagePath);
-    // });
-  pdf2pic.convert(req.file.path).then((resolve) => {
-  console.log("image converter successfully!");
+    var PDFImage = require("pdf-image").PDFImage;
+    var pdfImage = new PDFImage(req.file.path);
+    pdfImage.convertPage(0).then(function (imagePath) {
+      // 0-th page (first page) of the slide.pdf is available as slide-0.png
+      // fs.existsSync("/tmp/slide-0.png") // => true
+      // res.send({name: req.file.originalname, type: req.file.mimetype, size: req.file.size});
+      // res.send("Ok")
+      res.sendFile(imagePath);
+    });
+//   pdf2pic.convert(req.file.path).then((resolve) => {
+//   console.log("image converter successfully!");
  
-  return resolve;
-  res.send("ok")
+//   return resolve;
+//   res.send("ok")
   });
 
 })
