@@ -19,15 +19,15 @@ var upload = multer({storage: storage, limits: {fileSize: 30000000}});
 // var upload = multer({ dest: 'public/' })
 var fs = require('fs');
 
-const PDF2Pic = require("pdf2pic");
+// const PDF2Pic = require("pdf2pic");
  
-const pdf2pic = new PDF2Pic({
-  density: 100,           // output pixels per inch
-  savename: "untitled",   // output file name
-  savedir: "./images",    // output file location
-  format: "png",          // output file format
-  size: "600x600"         // output size in pixels
-});
+// const pdf2pic = new PDF2Pic({
+//   density: 100,           // output pixels per inch
+//   savename: "untitled",   // output file name
+//   savedir: "./images",    // output file location
+//   format: "png",          // output file format
+//   size: "600x600"         // output size in pixels
+// });
 
 var app = express();
 
