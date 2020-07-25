@@ -5,11 +5,17 @@ body {
 	font-size: 16px;
 	color: #222;
 	background-color: #ECF0F1;
-	text-align: center;
+	/*text-align: center;*/
+}
+
+#header {
+	text-align:center;
 }
 
 .container {
 	padding: 0;
+	width: 30%;
+	margin: auto;
 	margin-top: 40px;
 }
 
@@ -52,3 +58,18 @@ img {
 	margin: 20px auto 0 auto;
 	display: block;
 }
+
+@media only screen and (max-width: 600px) {
+.container {
+	width: 80%;
+	margin: auto;
+	margin-top: 40px;
+}
+.view {
+	min-width:80%
+}
+input#button {
+  max-width: 80%;
+}
+}
+
