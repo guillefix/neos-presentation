@@ -63,7 +63,7 @@ var pdfImage = new PDFImage(req.file.path, {
       // 0-th page (first page) of the slide.pdf is available as slide-0.png
       // fs.existsSync("/tmp/slide-0.png") // => true
       // res.send({name: req.file.originalname, type: req.file.mimetype, size: req.file.size});
-      res.send("Use this code: "+req.file.filename.split("-")[1].split(".")[0])
+      res.send("<p>Use this code: "+req.file.filename.split("-")[1].split(".")[0]+'</p><p><small><a href="/">Go back</a></small></p>')
       //res.sendFile(imagePath);
     }, function (err) {
       res.send(err, 500);
