@@ -5,6 +5,7 @@ var cors = require('cors');
 
 // require and use "multer"...
 var multer = require("multer");
+
 // var storage = multer.memoryStorage();
 // var storage = multer.diskStorage({});
 var storage = multer.diskStorage({
@@ -15,7 +16,7 @@ var storage = multer.diskStorage({
     cb(null, file.fieldname + '-' + Math.floor(Date.now()/100)%864000 + ".pdf")
   }
 })
-var upload = multer({storage: storage, limits: {fileSize: 30000000}});
+var upload = multer({storage: storage, limits: {fileSize: 500*1024*1024}}); //500MB
 // var upload = multer({ dest: 'public/' })
 var fs = require('fs');
 
@@ -53,11 +54,19 @@ app.post('/api/fileanalyse', upload.single('upfile'), (req, res, body) => {
   // res.send(req.file.path);
     var PDFImage = require("pdf-image").PDFImage;
     //var pdfImage = new PDFImage(req.file.path);
+//var pdfImage = new PDFImage(req.file.path, {
+//	  convertOptions: {
+//		      "-density": "300",
+//		    },
+//	convertExtension: "webp"
+//});
 var pdfImage = new PDFImage(req.file.path, {
 	  convertOptions: {
-		      "-density": "300",
-		      "-alpha": "off",
-		    }
+		      "-density": "200",
+		      "-define": "lossless:false",
+		      "-strip": ""
+		    },
+	convertExtension: "webp"
 });
     pdfImage.convertFile().then(function (imagePath) {
       // 0-th page (first page) of the slide.pdf is available as slide-0.png
